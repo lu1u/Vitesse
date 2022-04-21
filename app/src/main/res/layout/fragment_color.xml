@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/fond_fragment"
+    android:padding="8dp"
+    tools:context=".ColorFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/tvTitre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvExemple"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/taille_bouton_fragment_color"
+        android:background="@color/colorSecondary"
+        android:gravity="center"
+        android:text="#ff00ff00"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ibDilate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvTitre"
+        app:layout_constraintTop_toTopOf="@+id/ibDilate"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <SeekBar
+        android:id="@+id/seekBarR2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:max="255"
+        android:min="0"
+        android:padding="@dimen/padding_seekbar"
+        android:progress="250"
+        android:progressDrawable="@drawable/progress_red"
+        android:thumb="@drawable/slider_red"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvTitre"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitre" />
+
+    <SeekBar
+        android:id="@+id/seekBarG2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="255"
+        android:min="0"
+        android:padding="@dimen/padding_seekbar"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_green"
+        android:thumb="@drawable/slider_green"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/seekBarR2"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarR2" />
+
+    <SeekBar
+        android:id="@+id/seekBarA2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="255"
+        android:min="0"
+        android:padding="@dimen/padding_seekbar"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_alpha"
+        android:thumb="@drawable/slider_alpha"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/seekBarB2"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarB2" />
+
+    <SeekBar
+        android:id="@+id/seekBarB2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="255"
+        android:min="0"
+        android:padding="@dimen/padding_seekbar"
+        android:progress="50"
+        android:progressDrawable="@drawable/progress_blue"
+        android:thumb="@drawable/slider_blue"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/seekBarG2"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarG2" />
+
+    <ImageButton
+        android:id="@+id/ibContracte"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/contracte"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibDilate"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="@dimen/taille_bouton_fragment_color"
+        android:layout_height="@dimen/taille_bouton_fragment_color"
+        android:background="@android:color/transparent"
+        android:src="@drawable/dilate"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

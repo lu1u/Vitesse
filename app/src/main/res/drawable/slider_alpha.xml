@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"    android:shape="rectangle"    >
+    <solid        android:color="#000"        />
+    <stroke android:color="#444" android:width="@dimen/largeur_slider"/>
+    <size        android:width="25dp"        android:height="25dp"        />
+    <corners android:radius="@dimen/radius_slider"/>
+</shape>

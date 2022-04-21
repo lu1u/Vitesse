@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="AutosizeTextView">
+        <attr name="AutosizeTextTexte" format="string"/>
+        <attr name="AutosizeTextCouleur" format="color" />
+    </declare-styleable>
+</resources>

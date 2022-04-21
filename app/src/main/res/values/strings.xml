@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vitesse</string>
+    <string name="fond">Fond</string>
+    <string name="texte">Texte</string>
+    <string name="mode_incruste">Mode incrusté</string>
+    <string name="placeholder">Lorem ipsum</string>
+</resources>

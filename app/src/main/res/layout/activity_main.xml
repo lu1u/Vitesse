@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutPip"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.lpi.vitesse.AutosizeTextView
+            android:id="@+id/atvVitessePip"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:AutosizeTextTexte="99"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lpi.vitesse.AutosizeTextView
+            android:id="@+id/atvDirectionPip"
+            android:layout_width="@dimen/taille_boussole_pip"
+            android:layout_height="@dimen/taille_boussole_pip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutFullScreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_speedometer"
+            android:drawableTint="@color/colorOnPrimary"
+            android:padding="8dp"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorOnPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.lpi.vitesse.AutosizeTextView
+            android:id="@+id/atvVitesse"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="#2000"
+            android:padding="8dp"
+            app:AutosizeTextCouleur="@color/colorPrimary"
+            app:AutosizeTextTexte="128"
+            app:layout_constraintBottom_toTopOf="@+id/bSwitch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+        <com.lpi.vitesse.AutosizeTextView
+            android:id="@+id/atvDirection"
+            android:layout_width="@dimen/hauteur_boussole"
+            android:layout_height="@dimen/hauteur_boussole"
+            android:background="#0000"
+            app:layout_constraintBottom_toBottomOf="@+id/atvVitesse"
+            app:layout_constraintStart_toStartOf="@+id/atvVitesse" />
+
+        <fragment
+            android:id="@+id/frCouleurTexte"
+            android:name="com.lpi.vitesse.ColorFragment"
+            class="com.lpi.vitesse.ColorFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/frCouleurFond"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <fragment
+            android:id="@+id/frCouleurFond"
+            android:name="com.lpi.vitesse.ColorFragment"
+            class="com.lpi.vitesse.ColorFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <Button
+            android:id="@+id/bSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/mode_incruste"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/frCouleurTexte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
