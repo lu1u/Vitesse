@@ -34,6 +34,9 @@ public class AutosizeTextView extends View
 		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AutosizeTextView, defStyle, 0);
 		int couleurPrincipal = a.getColor(R.styleable.AutosizeTextView_AutosizeTextCouleur, Color.WHITE);
 		_texte = a.getString(R.styleable.AutosizeTextView_AutosizeTextTexte);
+		if ( _texte == null)
+			_texte = "";
+
 		a.recycle();
 
 		// Set up a default TextPaint object
@@ -74,9 +77,12 @@ public class AutosizeTextView extends View
 			_calculerTaille = false;
 		}
 
-		Rect rText = new Rect();
-		_textPaintPrincipal.getTextBounds(_texte, 0, _texte.length(), rText);
-		canvas.drawText(_texte, rPrincipal.exactCenterX() - rText.exactCenterX(), rPrincipal.exactCenterY() - rText.exactCenterY(), _textPaintPrincipal);
+		if (_texte!=null)
+		{
+			Rect rText = new Rect();
+			_textPaintPrincipal.getTextBounds(_texte, 0, _texte.length(), rText);
+			canvas.drawText(_texte, rPrincipal.exactCenterX() - rText.exactCenterX(), rPrincipal.exactCenterY() - rText.exactCenterY(), _textPaintPrincipal);
+		}
 	}
 
 	/**
@@ -84,7 +90,7 @@ public class AutosizeTextView extends View
 	 * Redessine le controle si le texte change
 	 * @param texte Nouveau texte a afficher
 	 */
-	public void setText(@NonNull final String texte)
+	public void setText( final String texte)
 	{
 		if ( ! texte.equals(_texte))
 		{

@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.app.PictureInPictureParams;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -15,7 +16,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.Settings;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -54,8 +55,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		if (checkPermissions())
 			initActivity();
 
+		if ( isInPictureInPictureMode())
+			switchToPip();
+		else
+			switchToFullScreen();
+
 		_tableauDirections = getResources().getStringArray(R.array.directions);
 	}
+
+
 
 	/***
 	 * Verifie que les permisions Android sont accordees, les demande sinon
@@ -210,7 +218,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			_locationManager.requestLocationUpdates(GPSUtils.getBestProvider(_locationManager), MIN_TIME_MS, MIN_DISTANCE_M, this);
 		} catch (Exception e)
 		{
-			Toast.makeText(this, "Impossible de démarrer le GPS", Toast.LENGTH_SHORT).show();
+			MessageBoxUtils.messageBox(this, R.string.no_gps_titre, R.string.no_gps, MessageBoxUtils.BOUTON_OK | MessageBoxUtils.BOUTON_CANCEL, new MessageBoxUtils.Listener()
+			{
+				@Override public void onOk()
+				{
+					startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+				}
+			});
 			e.printStackTrace();
 		}
 	}
@@ -269,5 +283,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	{
 		stopGPS();
 		super.onDestroy();
+	}
+
+	@Override protected void onPause()
+	{
+		super.onPause();
+		if (! isInPictureInPictureMode())
+		{
+			stopGPS();
+		}
+	}
+
+	@Override protected void onResume()
+	{
+		super.onResume();
+		startGPS();
 	}
 }

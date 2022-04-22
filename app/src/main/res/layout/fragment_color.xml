@@ -22,20 +22,18 @@
     <TextView
         android:id="@+id/tvExemple"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/taille_bouton_fragment_color"
         android:background="@color/colorSecondary"
         android:gravity="center"
         android:text="#ff00ff00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/ibDilate"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tvTitre"
-        app:layout_constraintTop_toTopOf="@+id/ibDilate"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/tvTitre" />
 
     <SeekBar
         android:id="@+id/seekBarR2"

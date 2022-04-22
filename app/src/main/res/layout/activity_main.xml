@@ -22,7 +22,7 @@
             android:id="@+id/atvVitessePip"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:AutosizeTextTexte="99"
+            app:AutosizeTextTexte="-"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,7 @@
             android:id="@+id/atvDirectionPip"
             android:layout_width="@dimen/taille_boussole_pip"
             android:layout_height="@dimen/taille_boussole_pip"
+            app:AutosizeTextTexte="-"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -64,29 +65,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/bSwitch"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/carte" />
+
+
         <com.lpi.vitesse.AutosizeTextView
             android:id="@+id/atvVitesse"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:background="#2000"
             android:padding="8dp"
             app:AutosizeTextCouleur="@color/colorPrimary"
-            app:AutosizeTextTexte="128"
-            app:layout_constraintBottom_toTopOf="@+id/bSwitch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+            app:AutosizeTextTexte="-"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintLeft_toLeftOf="@+id/imageView"
+            app:layout_constraintRight_toRightOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <com.lpi.vitesse.AutosizeTextView
             android:id="@+id/atvDirection"
             android:layout_width="@dimen/hauteur_boussole"
             android:layout_height="@dimen/hauteur_boussole"
             android:background="#0000"
+            app:AutosizeTextTexte="-"
             app:layout_constraintBottom_toBottomOf="@+id/atvVitesse"
             app:layout_constraintStart_toStartOf="@+id/atvVitesse" />
 

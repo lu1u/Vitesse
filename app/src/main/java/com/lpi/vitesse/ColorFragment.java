@@ -2,8 +2,6 @@ package com.lpi.vitesse;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionManager;
@@ -148,25 +146,21 @@ public class ColorFragment extends Fragment
 			}
 		});
 
-		_ibContracte.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				contracte();
-			}
-		});
+		_ibContracte.setOnClickListener(view -> contracte());
 
-		_ibDilate.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				dilate();
-			}
-		});
-
+		_ibDilate.setOnClickListener(view -> dilate());
 		contracte();
+
+		_tvExemple.setOnClickListener(new View.OnClickListener()
+		{
+			@Override public void onClick(View view)
+			{
+				if  (_ibContracte.getVisibility() == View.VISIBLE)
+					contracte();
+				else
+					dilate();
+			}
+		});
 		return v;
 	}
 

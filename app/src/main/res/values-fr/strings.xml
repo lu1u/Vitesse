@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vitesse</string>
+    <string name="fond">Fond</string>
+    <string name="texte">Texte</string>
+    <string name="mode_incruste">Mode incrusté</string>
+    <string name="placeholder">Lorem ipsum</string>
+    <string name="no_gps_titre">GPS inaccessible</string>
+    <string name="no_gps">Impossible de se connecter au GPS, il est peut-être désactivé. Voulez-vous ouvrir l\'écran de paramètres pour le GPS?</string>
+</resources>

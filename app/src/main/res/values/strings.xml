@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vitesse</string>
-    <string name="fond">Fond</string>
-    <string name="texte">Texte</string>
-    <string name="mode_incruste">Mode incrusté</string>
+    <string name="app_name">Speed</string>
+    <string name="fond">Background</string>
+    <string name="texte">Text</string>
+    <string name="mode_incruste">P.i.P mode</string>
     <string name="placeholder">Lorem ipsum</string>
+    <string name="no_gps_titre">GPS unavailable</string>
+    <string name="no_gps">Cannot get GPS position, it may be disabled. Do you want to open your phone parameter screen to enable GPS?</string>
 </resources>
