@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
  */
 public class ColorFragment extends Fragment
 {
+	public static final int DURATION = 400;
 	private int _couleur;
 
 	public interface Listener
@@ -32,8 +33,8 @@ public class ColorFragment extends Fragment
 	private SeekBar _sbR, _sbG, _sbB, _sbA;
 	private TextView _tvTitre, _tvExemple;
 	private ImageButton _ibContracte, _ibDilate;
-	private @Nullable
-	Listener _listener;
+	private ViewGroup _layoutSeekbars;
+	private @Nullable	Listener _listener;
 
 	public ColorFragment()
 	{
@@ -52,6 +53,7 @@ public class ColorFragment extends Fragment
 	{
 		// Inflate the layout for this fragment
 		View v = inflater.inflate(R.layout.fragment_color, container, false);
+		_layoutSeekbars = v.findViewById(R.id.layoutSeekbars);
 		_sbA = v.findViewById(R.id.seekBarA2);
 		_sbR = v.findViewById(R.id.seekBarR2);
 		_sbG = v.findViewById(R.id.seekBarG2);
@@ -133,17 +135,8 @@ public class ColorFragment extends Fragment
 				nouvelleCouleur(Color.argb(Color.alpha(_couleur), Color.red(_couleur), Color.green(_couleur), composante));
 			}
 
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar)
-			{
-
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar)
-			{
-
-			}
+			@Override public void onStartTrackingTouch(SeekBar seekBar){}
+			@Override public void onStopTrackingTouch(SeekBar seekBar){}
 		});
 
 		_ibContracte.setOnClickListener(view -> contracte());
@@ -151,15 +144,12 @@ public class ColorFragment extends Fragment
 		_ibDilate.setOnClickListener(view -> dilate());
 		contracte();
 
-		_tvExemple.setOnClickListener(new View.OnClickListener()
+		_tvExemple.setOnClickListener(view ->
 		{
-			@Override public void onClick(View view)
-			{
-				if  (_ibContracte.getVisibility() == View.VISIBLE)
-					contracte();
-				else
-					dilate();
-			}
+			if  (_ibContracte.getVisibility() == View.VISIBLE)
+				contracte();
+			else
+				dilate();
 		});
 		return v;
 	}
@@ -179,7 +169,8 @@ public class ColorFragment extends Fragment
 			if (parent != null)
 			{
 				Transition transition = new Slide();
-				transition.setDuration(200);
+				transition.addTarget(_layoutSeekbars);
+				transition.setDuration(DURATION);
 				transition.addTarget(_sbA);
 				transition.addTarget(_sbR);
 				transition.addTarget(_sbG);
@@ -209,7 +200,8 @@ public class ColorFragment extends Fragment
 			if (parent != null)
 			{
 				Transition transition = new Slide();
-				transition.setDuration(200);
+				transition.setDuration(DURATION);
+				transition.addTarget(_layoutSeekbars);
 				transition.addTarget(_sbA);
 				transition.addTarget(_sbR);
 				transition.addTarget(_sbG);
@@ -245,6 +237,10 @@ public class ColorFragment extends Fragment
 		_listener = listener;
 	}
 
+	/***
+	 * Change la couleur
+	 * @param couleur
+	 */
 	public void setCouleur(int couleur)
 	{
 		_couleur = couleur;
@@ -252,7 +248,6 @@ public class ColorFragment extends Fragment
 		_sbR.setProgress(Color.red(couleur));
 		_sbG.setProgress(Color.green(couleur));
 		_sbB.setProgress(Color.blue(couleur));
-
 		_tvExemple.setBackgroundColor(couleur);
 		_tvExemple.setText(String.format("#%02X%02X%02X%02X", Color.alpha(couleur), Color.red(couleur), Color.green(couleur), Color.blue(couleur)));
 	}

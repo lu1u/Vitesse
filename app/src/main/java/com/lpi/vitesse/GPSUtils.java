@@ -13,10 +13,16 @@ public class GPSUtils
 	private static final float MS_TO_KMH = 3.6f;
 	private static final float MAX_IMPRECISION = 20;
 
+	// Les valeurs de DIRECTION_xxx sont les indices dans le tableau de strings qui est dans les
+	// ressources
 	public static final int DIRECTION_NORD = 0;
 	public static final int DIRECTION_SUD = 1;
 	public static final int DIRECTION_EST = 2;
-	public static final int DIRECTION_OUEST= 3;
+	public static final int DIRECTION_OUEST = 3;
+	public static final int DIRECTION_NORD_EST = 4;
+	public static final int DIRECTION_NORD_OUEST = 5;
+	public static final int DIRECTION_SUD_OUEST = 6;
+	public static final int DIRECTION_SUD_EST = 7;
 
 	/**
 	 * Determines whether one Location reading is better than the current Location fix
@@ -30,7 +36,7 @@ public class GPSUtils
 			// A new location is always better than no location
 			return true;
 
-		if ( location.getAccuracy() > MAX_IMPRECISION)
+		if (location.getAccuracy() > MAX_IMPRECISION)
 			// Trop imprecis
 			return false;
 
@@ -60,7 +66,7 @@ public class GPSUtils
 		boolean isSignificantlyLessAccurate = accuracyDelta > 200;
 
 		// Check if the old and new location are from the same provider
-		boolean isFromSameProvider = isSameProvider(location.getProvider(),	currentBestLocation.getProvider());
+		boolean isFromSameProvider = isSameProvider(location.getProvider(), currentBestLocation.getProvider());
 
 		// Determine location quality using a combination of timeliness and accuracy
 		if (isMoreAccurate)
@@ -96,21 +102,22 @@ public class GPSUtils
 	 */
 	public static float getSpeed(@Nullable final Location position, @Nullable final Location precedente)
 	{
-		if ( position == null)
+		if (position == null)
 			return 0;
 
-		if (position.hasSpeed())
-			return position.getSpeed();
+//		if (position.hasSpeed())
+//			return position.getSpeed();
 
 		if (precedente != null)
 		{
-			float secondes = (float) (position.getTime() - precedente.getTime()) / 1000.0f;
-			float distance = position.distanceTo(precedente);
-			return distance / secondes * MS_TO_KMH;
+			float tempsEnSecondes = (float) (position.getTime() - precedente.getTime()) / 1000.0f;
+			float distanceEnMetres = position.distanceTo(precedente);
+			return (distanceEnMetres / tempsEnSecondes) * MS_TO_KMH;
 		}
 
 		return 0;
 	}
+
 
 	/***
 	 * Retrouve le cap d'une position GPS
@@ -134,19 +141,20 @@ public class GPSUtils
 	}
 
 
-		/***
-		 * Obtient le meilleur fournisseur de position pour avoir une mesure de vitesse precise
-		 * @param locationManager
-		 * @return
-		 */
+	/***
+	 * Obtient le meilleur fournisseur de position pour avoir une mesure de vitesse precise
+	 * @param locationManager
+	 * @return
+	 */
 	public static String getBestProvider(@NonNull final LocationManager locationManager)
 	{
 		Criteria criteria = new Criteria();
 		criteria.setAccuracy(Criteria.ACCURACY_FINE);
 		criteria.setAltitudeRequired(false);
-		criteria.setBearingRequired(false);
-		criteria.setCostAllowed(true);
-		criteria.setPowerRequirement(Criteria.POWER_HIGH);
+		criteria.setBearingRequired(true);
+		criteria.setBearingAccuracy(Criteria.NO_REQUIREMENT);
+		criteria.setCostAllowed(false);
+		criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
 		return locationManager.getBestProvider(criteria, true);
 	}
 
@@ -155,17 +163,22 @@ public class GPSUtils
 	 * @param heading
 	 * @return
 	 */
-	public static int getDirection(final float heading)
+	public static int getDirection( float heading)
 	{
-		if (heading < 45)
-			return DIRECTION_NORD ;
-		else if (heading < 135)
-			return DIRECTION_EST;
-		else if (heading < 225)
-			return DIRECTION_SUD;
-		else if (heading < 315)
-			return DIRECTION_OUEST;
-		else
-			return DIRECTION_NORD;
+		while( heading<0)
+			heading+=360.0f;
+
+		while( heading>360.0f)
+			heading-=360.0f;
+
+		if (heading < 22)	return DIRECTION_NORD;
+		else if (heading< 67) return DIRECTION_NORD_EST;
+		else if ( heading< 112)	return DIRECTION_EST;
+		else if (heading < 157)	return DIRECTION_SUD_EST;
+		else if (heading < 202) return DIRECTION_SUD;
+		else if (heading < 247) return DIRECTION_SUD_OUEST;
+		else if (heading < 292) return DIRECTION_OUEST;
+		else if (heading < 337) return DIRECTION_NORD_OUEST;
+		else return DIRECTION_NORD;
 	}
 }

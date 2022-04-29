@@ -6,6 +6,7 @@
                 android:endColor="#f00"
                 android:startColor="#000" />
             <corners android:radius="@dimen/corner_progress" />
+            <stroke android:color="@color/black" android:width="@dimen/stroke_progress"/>
         </shape>
     </item>
     <item android:id="@android:id/progress">
@@ -15,6 +16,7 @@
                     android:endColor="#f00"
                     android:startColor="#000" />
                 <corners android:radius="@dimen/corner_progress" />
+                <stroke android:color="@color/black" android:width="@dimen/stroke_progress"/>
             </shape>
         </clip>
     </item>

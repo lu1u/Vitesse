@@ -5,7 +5,8 @@
     <application
         android:allowBackup="true"
          android:label="@string/app_name"
-        android:icon="@drawable/ic_speedometer"
+        android:icon="@drawable/square_icon"
+        android:roundIcon="@drawable/round_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vitesse">
         <activity
@@ -16,7 +17,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

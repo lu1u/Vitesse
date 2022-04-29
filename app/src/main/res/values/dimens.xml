@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="radius_slider">2dp</dimen>
+    <dimen name="radius_slider">3dp</dimen>
     <dimen name="largeur_slider">4dp</dimen>
     <dimen name="padding_seekbar">2dp</dimen>
-    <dimen name="corner_progress">8dp</dimen>
+    <dimen name="corner_progress">10dp</dimen>
     <dimen name="largeur_fond_fragment">4dp</dimen>
     <dimen name="taille_bouton_fragment_color">32dp</dimen>
     <dimen name="hauteur_boussole">64dp</dimen>
     <dimen name="taille_boussole_pip">32dp</dimen>
+    <dimen name="stroke_progress">1dp</dimen>
+    <dimen name="marge_exemple_fullscreen">32dp</dimen>
 </resources>

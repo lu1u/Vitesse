@@ -7,4 +7,12 @@
     <string name="placeholder">Lorem ipsum</string>
     <string name="no_gps_titre">GPS unavailable</string>
     <string name="no_gps">Cannot get GPS position, it may be disabled. Do you want to open your phone parameter screen to enable GPS?</string>
+    <string name="ui_a_propos_icones">Icons from https://materialdesignicons.com/</string>
+    <string name="ui_a_propos_code">Some code from: https://stackoverflow.com/</string>
+    <string name="gps_provider_disabled">Location provider disabled, trying to use another one</string>
+    <string name="advanced_parameters">Advanced parameters</string>
+    <string name="gps">GPS:</string>
+    <string name="min_meters_between_two_positions">Min. meters between two positions:</string>
+    <string name="min_seconds_between_two_positions">Min. seconds between two positions:</string>
+    <string name="gps_provider">Location provider: %s</string>
 </resources>

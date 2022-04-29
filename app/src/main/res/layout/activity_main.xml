@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.lpi.vitesse.AutosizeTextView
+        <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvVitessePip"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.lpi.vitesse.AutosizeTextView
+        <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvDirectionPip"
             android:layout_width="@dimen/taille_boussole_pip"
             android:layout_height="@dimen/taille_boussole_pip"
@@ -55,15 +55,38 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:drawableStart="@drawable/ic_speedometer"
-            android:drawableTint="@color/colorOnPrimary"
+            android:drawablePadding="8dp"
             android:padding="8dp"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorOnPrimary"
+            app:drawableStartCompat="@drawable/ic_speedometer"
+            app:drawableTint="@color/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="#0000"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:srcCompat="@drawable/information" />
+
+        <ImageButton
+            android:id="@+id/ibSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="#0000"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/ibAbout"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:srcCompat="@drawable/settings" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -81,14 +104,14 @@
             app:srcCompat="@drawable/carte" />
 
 
-        <com.lpi.vitesse.AutosizeTextView
+        <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvVitesse"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="@dimen/marge_exemple_fullscreen"
+            android:layout_marginTop="@dimen/marge_exemple_fullscreen"
+            android:layout_marginRight="@dimen/marge_exemple_fullscreen"
+            android:layout_marginBottom="@dimen/marge_exemple_fullscreen"
             android:background="#2000"
             android:padding="8dp"
             app:AutosizeTextCouleur="@color/colorPrimary"
@@ -98,7 +121,7 @@
             app:layout_constraintRight_toRightOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-        <com.lpi.vitesse.AutosizeTextView
+        <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvDirection"
             android:layout_width="@dimen/hauteur_boussole"
             android:layout_height="@dimen/hauteur_boussole"

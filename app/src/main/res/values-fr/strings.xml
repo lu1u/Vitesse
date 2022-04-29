@@ -7,4 +7,12 @@
     <string name="placeholder">Lorem ipsum</string>
     <string name="no_gps_titre">GPS inaccessible</string>
     <string name="no_gps">Impossible de se connecter au GPS, il est peut-être désactivé. Voulez-vous ouvrir l\'écran de paramètres pour le GPS?</string>
+    <string name="ui_a_propos_icones">Source des icônes https://materialdesignicons.com/</string>
+    <string name="ui_a_propos_code">Quelques morceaux de code: https://stackoverflow.com/</string>
+    <string name="gps_provider_disabled">Fournisseur de position désactivé, tentative d\'en utiliser un autre</string>
+    <string name="advanced_parameters">Paramètres avancés:</string>
+    <string name="gps">GPS:</string>
+    <string name="min_meters_between_two_positions">Mètres min. entre deux positions:</string>
+    <string name="min_seconds_between_two_positions">Secondes min. entre deux positions:</string>
+    <string name="gps_provider">Fournisseur de position: %s</string>
 </resources>

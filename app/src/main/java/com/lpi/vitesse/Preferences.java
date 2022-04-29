@@ -9,10 +9,14 @@ import androidx.annotation.Nullable;
 /***
  * Classe pour gerer les preferences
  */
+@SuppressWarnings("CommentedOutCode")
 public class Preferences
 {
 	public static final @NonNull String PREFERENCES_COULEUR_TEXTE = "CouleurTexte";
 	public static final @NonNull String PREFERENCES_COULEUR_FOND = "CouleurFond";
+	public static final String PREFERENCES_DISTANCE_MIN = "DistanceMin";
+	public static final String PREFERENCES_TEMPS_MIN = "TempsMin";
+	public static final String PREFERENCES_PROVIDER = "Provider";
 
 	@NonNull private static final String PREFERENCES = Preferences.class.getName();
 
@@ -68,7 +72,7 @@ public class Preferences
 		editor.apply();
 	}
 
-
+/*
 	public float getFloat(@NonNull final String nom, float defaut)
 	{
 		return settings.getFloat(nom, defaut);
@@ -92,7 +96,7 @@ public class Preferences
 	{
 		return settings.getString(nom, defaut + " ").charAt(0);
 	}
-
+*/
 	public String getString(@NonNull final String nom, final String defaut)
 	{
 		return settings.getString(nom, defaut);

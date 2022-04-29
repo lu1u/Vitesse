@@ -5,8 +5,8 @@
     <color name="colorOnPrimary">@color/white</color>
 
 
-    <color name="colorSecondary">#607D8B</color>
-    <color name="colorSecondaryVariant">#455A64</color>
+    <color name="colorSecondary">#FFEB3B</color>
+    <color name="colorSecondaryVariant">#FBC02D</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

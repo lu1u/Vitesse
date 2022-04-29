@@ -1,4 +1,4 @@
-package com.lpi.vitesse;
+package com.lpi.vitesse.customviews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,6 +11,9 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.lpi.vitesse.R;
 
 /**
  * Custom view pour afficher un texte dont la taille s'adapte automatiquement
@@ -18,9 +21,10 @@ import androidx.annotation.NonNull;
 public class AutosizeTextView extends View
 {
 	private TextPaint _textPaintPrincipal;
-
-	private String _texte = " ";
-	private boolean _calculerTaille = true ;
+	Rect _rPrincipal = new Rect();			// Pour eviter des allocations dans onDraw
+	Rect _rText = new Rect();
+	private String _texte = "";
+	private boolean _calculerTaille = true;
 
 	public AutosizeTextView(Context context)
 	{
@@ -34,7 +38,7 @@ public class AutosizeTextView extends View
 		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AutosizeTextView, defStyle, 0);
 		int couleurPrincipal = a.getColor(R.styleable.AutosizeTextView_AutosizeTextCouleur, Color.WHITE);
 		_texte = a.getString(R.styleable.AutosizeTextView_AutosizeTextTexte);
-		if ( _texte == null)
+		if (_texte == null)
 			_texte = "";
 
 		a.recycle();
@@ -45,7 +49,6 @@ public class AutosizeTextView extends View
 		_textPaintPrincipal.setFlags(Paint.ANTI_ALIAS_FLAG);
 		_textPaintPrincipal.setTextAlign(Paint.Align.LEFT);
 	}
-
 
 
 	public AutosizeTextView(Context context, AttributeSet attrs)
@@ -60,41 +63,44 @@ public class AutosizeTextView extends View
 		init(attrs, defStyle);
 	}
 
-	@Override
-	protected void onDraw(@NonNull Canvas canvas)
+	/***********************************************************************************************
+	 * Affichage
+	 * @param canvas
+	 */
+	@Override protected void onDraw(@NonNull Canvas canvas)
 	{
 		super.onDraw(canvas);
-		Rect rPrincipal =new Rect( 0,0, getWidth(), getHeight());
-
-		rPrincipal.left += getPaddingLeft();
-		rPrincipal.right -= getPaddingRight();
-		rPrincipal.top += getPaddingTop();
-		rPrincipal.bottom -= getPaddingBottom();
-
-		if (_calculerTaille)
+		if (_texte != null)
 		{
-			calculeTextPaint(_texte, rPrincipal, _textPaintPrincipal);
-			_calculerTaille = false;
-		}
 
-		if (_texte!=null)
-		{
-			Rect rText = new Rect();
-			_textPaintPrincipal.getTextBounds(_texte, 0, _texte.length(), rText);
-			canvas.drawText(_texte, rPrincipal.exactCenterX() - rText.exactCenterX(), rPrincipal.exactCenterY() - rText.exactCenterY(), _textPaintPrincipal);
+			_rPrincipal.set(0, 0, getWidth(), getHeight());
+			_rPrincipal.left += getPaddingLeft();
+			_rPrincipal.right -= getPaddingRight();
+			_rPrincipal.top += getPaddingTop();
+			_rPrincipal.bottom -= getPaddingBottom();
+
+			if (_calculerTaille)
+			{
+				calculeTextPaint(_texte, _rPrincipal, _textPaintPrincipal);
+				_calculerTaille = false;
+			}
+
+			_textPaintPrincipal.getTextBounds(_texte, 0, _texte.length(), _rText);
+			canvas.drawText(_texte, _rPrincipal.exactCenterX() - _rText.exactCenterX(), _rPrincipal.exactCenterY() - _rText.exactCenterY(), _textPaintPrincipal);
 		}
 	}
 
-	/**
+	/***********************************************************************************************
 	 * Change le texte a afficher
 	 * Redessine le controle si le texte change
+	 *
 	 * @param texte Nouveau texte a afficher
 	 */
-	public void setText( final String texte)
+	public void setText(@Nullable final String texte)
 	{
-		if ( ! texte.equals(_texte))
+		if (!_texte.equals(texte))
 		{
-			if ( texte != null)
+			if (texte != null)
 				_texte = texte;
 			else
 				_texte = "";
@@ -103,6 +109,10 @@ public class AutosizeTextView extends View
 		}
 	}
 
+	/***********************************************************************************************
+	 * Change la couleur du texte
+	 * @param couleur
+	 */
 	public void setTextColor(int couleur)
 	{
 		_textPaintPrincipal.setColor(couleur);
@@ -119,25 +129,24 @@ public class AutosizeTextView extends View
 
 		float texteMax = Math.min(r.width(), r.height());
 		float texteMin = 1;
-		float tailleTexte = texteMin + (texteMax-texteMin)/2.0f;
+		float tailleTexte = texteMin + (texteMax - texteMin) / 2.0f;
 
 		Rect rText = new Rect();
 
 		// Recherche dichotomique de la taille
-		while (texteMax>(texteMin+1))
+		while (texteMax > (texteMin + 1))
 		{
 			textPaint.setTextSize(tailleTexte);
 			textPaint.getTextBounds(texte, 0, texte.length(), rText);
 
-			if ((rText.width() > contentWidth) || (rText.height() > contentHeight) )
+			if ((rText.width() > contentWidth) || (rText.height() > contentHeight))
 				// Trop grand
 				texteMax = tailleTexte;
 			else
 				// Trop petit
 				texteMin = tailleTexte;
 
-			tailleTexte = texteMin + (texteMax-texteMin)/2.0f;
+			tailleTexte = texteMin + (texteMax - texteMin) / 2.0f;
 		}
-
 	}
 }
