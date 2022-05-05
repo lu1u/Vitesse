@@ -18,23 +18,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.lpi.vitesse.customviews.AutosizeTextView
-            android:id="@+id/atvVitessePip"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:AutosizeTextTexte="-"
+        <View
+            android:id="@+id/vFondPip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#4000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.lpi.vitesse.customviews.CapView
+            android:id="@+id/capViewPip"
+            android:layout_width="0dp"
+            android:layout_height="128dp"
+            android:background="#0000"
+            app:VitesseCap="5"
+            app:VitesseRatioTaille="0.2"
+            app:VitesseTextCouleur="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.lpi.vitesse.customviews.AutosizeTextView
-            android:id="@+id/atvDirectionPip"
-            android:layout_width="@dimen/taille_boussole_pip"
-            android:layout_height="@dimen/taille_boussole_pip"
+            android:id="@+id/atvVitessePip"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="-24dp"
+            android:background="#0000"
             app:AutosizeTextTexte="-"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/capViewPip" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -56,15 +73,26 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:drawablePadding="8dp"
-            android:padding="8dp"
+            android:paddingLeft="32dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorOnPrimary"
-            app:drawableStartCompat="@drawable/ic_speedometer"
             app:drawableTint="@color/colorOnPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="16dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:srcCompat="@drawable/round_icon" />
 
         <ImageButton
             android:id="@+id/ibAbout"
@@ -104,31 +132,48 @@
             app:srcCompat="@drawable/carte" />
 
 
+        <View
+            android:id="@+id/vFond"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#4000"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <com.lpi.vitesse.customviews.CapView
+            android:id="@+id/capView"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:background="#0000"
+            app:VitesseCap="5"
+            app:VitesseRatioTaille="0.2"
+            app:VitesseTextCouleur="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/atvVitesse"
+            app:layout_constraintStart_toStartOf="@+id/atvVitesse"
+            app:layout_constraintTop_toTopOf="@+id/vFond" />
+
         <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvVitesse"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/marge_exemple_fullscreen"
-            android:layout_marginTop="@dimen/marge_exemple_fullscreen"
-            android:layout_marginRight="@dimen/marge_exemple_fullscreen"
+            android:layout_marginTop="-24dp"
             android:layout_marginBottom="@dimen/marge_exemple_fullscreen"
-            android:background="#2000"
+            android:background="#0000"
             android:padding="8dp"
             app:AutosizeTextCouleur="@color/colorPrimary"
             app:AutosizeTextTexte="-"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/vFond"
             app:layout_constraintLeft_toLeftOf="@+id/imageView"
             app:layout_constraintRight_toRightOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <com.lpi.vitesse.customviews.AutosizeTextView
-            android:id="@+id/atvDirection"
-            android:layout_width="@dimen/hauteur_boussole"
-            android:layout_height="@dimen/hauteur_boussole"
-            android:background="#0000"
-            app:AutosizeTextTexte="-"
-            app:layout_constraintBottom_toBottomOf="@+id/atvVitesse"
-            app:layout_constraintStart_toStartOf="@+id/atvVitesse" />
+            app:layout_constraintStart_toStartOf="@+id/vFond"
+            app:layout_constraintTop_toBottomOf="@+id/capView" />
 
         <fragment
             android:id="@+id/frCouleurTexte"

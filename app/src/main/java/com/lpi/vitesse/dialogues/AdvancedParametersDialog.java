@@ -24,10 +24,7 @@ public class AdvancedParametersDialog
 	public interface Listener
 	{
 		void onOK();
-
-		default void onCancel()
-		{
-		}
+		void onCancel();
 	}
 
 	private static InputFilter inRange(int min, int max)
@@ -74,7 +71,6 @@ public class AdvancedParametersDialog
 
 		// Boutons OK et Annuler
 		Button bOk = dialogView.findViewById(R.id.btOk);
-		Button bCancel = dialogView.findViewById(R.id.btCancel);
 		bOk.setOnClickListener(view ->
 		{
 			final int minDistance = contraint(0, 200, etMinDistance.getText().toString());
@@ -90,6 +86,7 @@ public class AdvancedParametersDialog
 			dialogBuilder.dismiss();
 		});
 
+		Button bCancel = dialogView.findViewById(R.id.btCancel);
 		bCancel.setOnClickListener(view ->
 		{
 			if (listener != null)

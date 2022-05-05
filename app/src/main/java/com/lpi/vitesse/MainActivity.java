@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.lpi.vitesse.customviews.AutosizeTextView;
+import com.lpi.vitesse.customviews.CapView;
 import com.lpi.vitesse.dialogues.AdvancedParametersDialog;
 import com.lpi.vitesse.dialogues.DialogAPropos;
 
@@ -48,11 +49,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	public static final int MIN_TIME_S = 0;
 	public static final int MIN_DISTANCE_M = 0;
 
-	ViewGroup _fullscreenLayout, _pipLayout;
+	// Gestion du GPS
 	private @Nullable LocationManager _locationManager;
 	private @Nullable Location _precedente;
-	private AutosizeTextView _atvVitesse, _atvVitessePip, _atvDirection, _atvDirectionPip;
-	private String[] _tableauDirections;
+
+	// Controles de l'interface utilisateur
+	ViewGroup _fullscreenLayout, _pipLayout;
+	private AutosizeTextView _atvVitesse;
+	private CapView _capView;
+	private View _vFond;
 
 	/***
 	 * Creation de l'activity et de son contenu
@@ -72,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			switchToPip();
 		else
 			switchToFullScreen();
-
-		_tableauDirections = getResources().getStringArray(R.array.directions);
 	}
 
 
@@ -130,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		{
 			// Changer la taille de la vue Direction pour qu'elle occupe le tiers de la hauteur et
 			// de la largeur
-			ViewGroup.LayoutParams params = _atvDirection.getLayoutParams();
-			params.height = (bottom-top)/4;
-			params.width = (right-left)/4;
-			_atvDirection.setLayoutParams(params);
+			ViewGroup.LayoutParams params = _capView.getLayoutParams();
+			params.height = (bottom-top)/6;
+			//params.width = (right-left)/4;
+			_capView.setLayoutParams(params);
 		});
 
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,10 +146,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		{
 			// Changer la taille de la vue Direction pour qu'elle occupe le tiers de la hauteur et
 			// de la largeur
-			ViewGroup.LayoutParams params = _atvDirectionPip.getLayoutParams();
+			ViewGroup.LayoutParams params = _capView.getLayoutParams();
 			params.height = (bottom-top)/4;
-			params.width = (right-left)/4;
-			_atvDirectionPip.setLayoutParams(params);
+			//params.width = (right-left)/4;
+			_capView.setLayoutParams(params);
 		});
 
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,26 +167,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			MainActivity.this.enterPictureInPictureMode(params);
 		});
 
-		////////////////////////////////////////////////////////////////////////////////////////////
-		// Affichage de la vitesse
-		{
-			_atvVitesse = findViewById(R.id.atvVitesse);
-			_atvVitesse.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-			_atvVitesse.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
-
-			_atvVitessePip = findViewById(R.id.atvVitessePip);
-			_atvVitessePip.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-			_atvVitessePip.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
-		}
-
-		////////////////////////////////////////////////////////////////////////////////////////////
-		// Direction
-		{
-			_atvDirection = findViewById(R.id.atvDirection);
-			_atvDirection.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-			_atvDirectionPip = findViewById(R.id.atvDirectionPip);
-			_atvDirectionPip.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////
 		// Fragment Couleur de texte
@@ -195,9 +178,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			fragmentCouleurTexte.setListener(couleur ->
 			{
 				_atvVitesse.setTextColor(couleur);
-				_atvVitessePip.setTextColor(couleur);
-				_atvDirection.setTextColor(couleur);
-				_atvDirectionPip.setTextColor(couleur);
+				_capView.setTextColor(couleur);
 				preferences.setInt(Preferences.PREFERENCES_COULEUR_TEXTE, couleur);
 			});
 		}
@@ -210,8 +191,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			fragmentCouleurFond.setCouleur(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
 			fragmentCouleurFond.setListener(couleur ->
 			{
-				_atvVitesse.setBackgroundColor(couleur);
-				_atvVitessePip.setBackgroundColor(couleur);
+				_vFond.setBackgroundColor(couleur);
 				preferences.setInt(Preferences.PREFERENCES_COULEUR_FOND, couleur);
 			});
 		}
@@ -227,10 +207,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		// Parametres avances
 		{
 			ImageButton ibSettings = findViewById(R.id.ibSettings);
-			ibSettings.setOnClickListener(view -> AdvancedParametersDialog.start(MainActivity.this, () ->
+			ibSettings.setOnClickListener(view -> AdvancedParametersDialog.start(MainActivity.this, new AdvancedParametersDialog.Listener()
 			{
-				stopGPS();
-				startGPS();
+				@Override public void onOK()
+				{
+					stopGPS();
+					startGPS();
+				}
+
+				@Override public void onCancel()
+				{
+
+				}
 			}));
 		}
 
@@ -259,6 +247,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	{
 		_fullscreenLayout.setVisibility(View.VISIBLE);
 		_pipLayout.setVisibility(View.GONE);
+		_atvVitesse = findViewById(R.id.atvVitesse);
+		_capView = findViewById(R.id.capView);
+		_vFond =findViewById(R.id.vFond);
+
+		Preferences preferences = Preferences.getInstance(this);
+		_atvVitesse.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_capView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_vFond.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
 	}
 
 	/***********************************************************************************************
@@ -268,6 +264,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	{
 		_fullscreenLayout.setVisibility(View.GONE);
 		_pipLayout.setVisibility(View.VISIBLE);
+		_atvVitesse = findViewById(R.id.atvVitessePip);
+		_capView = findViewById(R.id.capViewPip);
+		_vFond =findViewById(R.id.vFondPip);
+
+		Preferences preferences = Preferences.getInstance(this);
+		_atvVitesse.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_capView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_vFond.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
 	}
 
 	/***********************************************************************************************
@@ -329,17 +333,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			// Vitesse
 			final float vitesse = GPSUtils.getSpeed(position, _precedente);
 			String texte = formatSpeed(vitesse);
-			_atvVitessePip.setText(texte);
 			_atvVitesse.setText(texte);
 
 			// Direction
-			final float bearing = GPSUtils.getBearing(position, _precedente);
-			final int indice = GPSUtils.getDirection(bearing);
-			if (indice >= 0 && indice < _tableauDirections.length)
-			{
-				_atvDirectionPip.setText(_tableauDirections[indice]);
-				_atvDirection.setText(_tableauDirections[indice]);
-			}
+			float bearing = GPSUtils.getBearing(position, _precedente);
+			while (bearing<0)
+				bearing += 360.0f;
+
+			while (bearing>360.0f)
+				bearing -= 360.0f;
+
+			_capView.setCap(bearing);
 
 			// Memoriser la derniere position pour le prochain calcul de vitesse
 			_precedente = position;
@@ -354,9 +358,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	 */
 	private String formatSpeed(final float speed)
 	{
-		if ( speed < 10)
-			return String.format(getResources().getConfiguration().getLocales().get(0),"%.1f", speed);
-		else
+//		if ( speed < 10)
+//			return String.format(getResources().getConfiguration().getLocales().get(0),"%.1f", speed);
+//		else
 			// Pas de decimale au dessus de 20km/h
 			return Integer.toString((int)speed);
 	}

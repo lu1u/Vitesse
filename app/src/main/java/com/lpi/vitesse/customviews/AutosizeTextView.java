@@ -40,7 +40,6 @@ public class AutosizeTextView extends View
 		_texte = a.getString(R.styleable.AutosizeTextView_AutosizeTextTexte);
 		if (_texte == null)
 			_texte = "";
-
 		a.recycle();
 
 		// Set up a default TextPaint object
@@ -72,13 +71,6 @@ public class AutosizeTextView extends View
 		super.onDraw(canvas);
 		if (_texte != null)
 		{
-
-			_rPrincipal.set(0, 0, getWidth(), getHeight());
-			_rPrincipal.left += getPaddingLeft();
-			_rPrincipal.right -= getPaddingRight();
-			_rPrincipal.top += getPaddingTop();
-			_rPrincipal.bottom -= getPaddingBottom();
-
 			if (_calculerTaille)
 			{
 				calculeTextPaint(_texte, _rPrincipal, _textPaintPrincipal);
@@ -148,5 +140,18 @@ public class AutosizeTextView extends View
 
 			tailleTexte = texteMin + (texteMax - texteMin) / 2.0f;
 		}
+	}
+
+	@Override protected void onSizeChanged(int w, int h, int oldw, int oldh)
+	{
+		_rPrincipal.set(0, 0, getWidth(), getHeight());
+		_rPrincipal.left += getPaddingLeft();
+		_rPrincipal.right -= getPaddingRight();
+		_rPrincipal.top += getPaddingTop();
+		_rPrincipal.bottom -= getPaddingBottom();
+
+		_calculerTaille = true;
+		invalidate();
+		super.onSizeChanged(w, h, oldw, oldh);
 	}
 }
