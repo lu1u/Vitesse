@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/contracte.xml" value="0.1" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/dilate.xml" value="0.228" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/fond_fragment.xml" value="0.1" />
-        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_boussole.xml" value="0.1115" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_boussole.xml" value="0.67" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_dessin.xml" value="0.1115" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_icone.xml" value="0.1115" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_speedometer.xml" value="0.1" />
@@ -22,12 +23,13 @@
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/square_icon_background.xml" value="0.1185" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout-small/layout.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_apropos.xml" value="0.25" />
-        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_main.xml" value="0.34210526315789475" />
-        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/advanced_parameters.xml" value="0.33" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_main.xml" value="0.5751633986928104" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/advanced_parameters.xml" value="0.9" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/fragment_color.xml" value="0.75" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/main_normal.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/main_pip.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_autosize_text_view.xml" value="0.1" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_boussole_view.xml" value="0.33" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_vitesse_view.xml" value="0.33" />
       </map>
     </option>

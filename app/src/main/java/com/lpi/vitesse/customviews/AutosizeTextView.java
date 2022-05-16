@@ -21,8 +21,8 @@ import com.lpi.vitesse.R;
 public class AutosizeTextView extends View
 {
 	private TextPaint _textPaintPrincipal;
-	Rect _rPrincipal = new Rect();			// Pour eviter des allocations dans onDraw
-	Rect _rText = new Rect();
+	final Rect _rPrincipal = new Rect();			// Pour eviter des allocations dans onDraw
+	final Rect _rText = new Rect();
 	private String _texte = "";
 	private boolean _calculerTaille = true;
 

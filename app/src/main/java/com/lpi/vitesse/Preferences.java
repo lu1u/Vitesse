@@ -51,8 +51,13 @@ public class Preferences
 	{
 		return settings.getInt(nom, defaut);
 	}
+	public void setInt(@NonNull final String nom, int val)
+	{
+		editor.putInt(nom, val);
+		editor.apply();
+	}
 
-
+	/*
 	public void setBoolean(@NonNull final String nom, boolean val)
 	{
 		editor.putBoolean(nom, val);
@@ -60,43 +65,39 @@ public class Preferences
 	}
 
 
-	public boolean getBoolean(@NonNull final String nom, boolean defaut)
-	{
-		return settings.getBoolean(nom, defaut);
-	}
+		public boolean getBoolean(@NonNull final String nom, boolean defaut)
+		{
+			return settings.getBoolean(nom, defaut);
+		}
 
 
-	public void setInt(@NonNull final String nom, int val)
-	{
-		editor.putInt(nom, val);
-		editor.apply();
-	}
-
-/*
-	public float getFloat(@NonNull final String nom, float defaut)
-	{
-		return settings.getFloat(nom, defaut);
-	}
 
 
-	public void setFloat(@NonNull final String nom, float val)
-	{
-		editor.putFloat(nom, val);
-		editor.apply();
-	}
+
+		public float getFloat(@NonNull final String nom, float defaut)
+		{
+			return settings.getFloat(nom, defaut);
+		}
 
 
-	public void setChar(@NonNull final String nom, char val)
-	{
-		editor.putString(nom, "" + val);
-		editor.apply();
-	}
+		public void setFloat(@NonNull final String nom, float val)
+		{
+			editor.putFloat(nom, val);
+			editor.apply();
+		}
 
-	public char getChar(@NonNull final String nom, char defaut)
-	{
-		return settings.getString(nom, defaut + " ").charAt(0);
-	}
-*/
+
+		public void setChar(@NonNull final String nom, char val)
+		{
+			editor.putString(nom, "" + val);
+			editor.apply();
+		}
+
+		public char getChar(@NonNull final String nom, char defaut)
+		{
+			return settings.getString(nom, defaut + " ").charAt(0);
+		}
+	*/
 	public String getString(@NonNull final String nom, final String defaut)
 	{
 		return settings.getString(nom, defaut);

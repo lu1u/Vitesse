@@ -15,4 +15,6 @@
     <string name="min_meters_between_two_positions">Min. meters between two positions:</string>
     <string name="min_seconds_between_two_positions">Min. seconds between two positions:</string>
     <string name="gps_provider">Location provider: %s</string>
+    <string name="ui_change_seulement_si_necessaire">Change only to solve problems and if you know what you are doing</string>
+
 </resources>

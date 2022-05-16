@@ -26,7 +26,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.lpi.vitesse.customviews.AutosizeTextView;
-import com.lpi.vitesse.customviews.CapView;
+import com.lpi.vitesse.customviews.BoussoleView;
 import com.lpi.vitesse.dialogues.AdvancedParametersDialog;
 import com.lpi.vitesse.dialogues.DialogAPropos;
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	// Controles de l'interface utilisateur
 	ViewGroup _fullscreenLayout, _pipLayout;
 	private AutosizeTextView _atvVitesse;
-	private CapView _capView;
+	private BoussoleView _boussoleView;
 	private View _vFond;
 
 	/***
@@ -133,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		{
 			// Changer la taille de la vue Direction pour qu'elle occupe le tiers de la hauteur et
 			// de la largeur
-			ViewGroup.LayoutParams params = _capView.getLayoutParams();
-			params.height = (bottom-top)/6;
+			ViewGroup.LayoutParams params = _boussoleView.getLayoutParams();
+			params.height = (bottom-top)/4;
 			//params.width = (right-left)/4;
-			_capView.setLayoutParams(params);
+			_boussoleView.setLayoutParams(params);
 		});
 
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,10 +146,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		{
 			// Changer la taille de la vue Direction pour qu'elle occupe le tiers de la hauteur et
 			// de la largeur
-			ViewGroup.LayoutParams params = _capView.getLayoutParams();
+			ViewGroup.LayoutParams params = _boussoleView.getLayoutParams();
 			params.height = (bottom-top)/4;
 			//params.width = (right-left)/4;
-			_capView.setLayoutParams(params);
+			_boussoleView.setLayoutParams(params);
 		});
 
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			fragmentCouleurTexte.setListener(couleur ->
 			{
 				_atvVitesse.setTextColor(couleur);
-				_capView.setTextColor(couleur);
+				_boussoleView.setTextColor(couleur);
 				preferences.setInt(Preferences.PREFERENCES_COULEUR_TEXTE, couleur);
 			});
 		}
@@ -248,12 +248,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		_fullscreenLayout.setVisibility(View.VISIBLE);
 		_pipLayout.setVisibility(View.GONE);
 		_atvVitesse = findViewById(R.id.atvVitesse);
-		_capView = findViewById(R.id.capView);
+		_boussoleView = findViewById(R.id.capView);
 		_vFond =findViewById(R.id.vFond);
 
 		Preferences preferences = Preferences.getInstance(this);
 		_atvVitesse.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-		_capView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_boussoleView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
 		_vFond.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
 	}
 
@@ -265,12 +265,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		_fullscreenLayout.setVisibility(View.GONE);
 		_pipLayout.setVisibility(View.VISIBLE);
 		_atvVitesse = findViewById(R.id.atvVitessePip);
-		_capView = findViewById(R.id.capViewPip);
+		_boussoleView = findViewById(R.id.capViewPip);
 		_vFond =findViewById(R.id.vFondPip);
 
 		Preferences preferences = Preferences.getInstance(this);
 		_atvVitesse.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
-		_capView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
+		_boussoleView.setTextColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_TEXTE, COULEUR_TEXTE_DEFAUT));
 		_vFond.setBackgroundColor(preferences.getInt(Preferences.PREFERENCES_COULEUR_FOND, COULEUR_FOND_DEFAUT));
 	}
 
@@ -290,17 +290,16 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			if (_locationManager != null)
 				_locationManager.removeUpdates(this);
 
-			Preferences preferences = Preferences.getInstance(this);
-			final int minDistance = preferences.getInt(Preferences.PREFERENCES_DISTANCE_MIN, MIN_DISTANCE_M);
-			final int minTemps = preferences.getInt(Preferences.PREFERENCES_TEMPS_MIN, MIN_TIME_S);
-
 			_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 			// Choisir un fournisseur de localisation
-			String provider = preferences.getString(Preferences.PREFERENCES_PROVIDER, "");
+			Preferences preferences = Preferences.getInstance(this);
+			String provider = preferences.getString(Preferences.PREFERENCES_PROVIDER, LocationManager.GPS_PROVIDER);
 			if ("".equals(provider))
 				provider = GPSUtils.getBestProvider(_locationManager);
 
+			final int minDistance = preferences.getInt(Preferences.PREFERENCES_DISTANCE_MIN, MIN_DISTANCE_M);
+			final int minTemps = preferences.getInt(Preferences.PREFERENCES_TEMPS_MIN, MIN_TIME_S);
 			_locationManager.requestLocationUpdates(provider, minTemps*1000L, minDistance, this);
 			Toast.makeText(this, getString(R.string.gps_provider, provider), Toast.LENGTH_SHORT).show();
 		} catch (Exception e)
@@ -343,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			while (bearing>360.0f)
 				bearing -= 360.0f;
 
-			_capView.setCap(bearing);
+			_boussoleView.setCap(bearing);
 
 			// Memoriser la derniere position pour le prochain calcul de vitesse
 			_precedente = position;

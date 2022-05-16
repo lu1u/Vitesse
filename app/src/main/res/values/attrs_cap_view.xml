@@ -1,7 +1,0 @@
-<resources>
-    <declare-styleable name="VitesseView">
-         <attr name="VitesseCap" format="integer"/>
-        <attr name="VitesseTextCouleur" format="color" />
-        <attr name="VitesseRatioTaille" format="float"/>
-    </declare-styleable>
-</resources>

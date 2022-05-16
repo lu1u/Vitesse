@@ -15,14 +15,14 @@ public class GPSUtils
 
 	// Les valeurs de DIRECTION_xxx sont les indices dans le tableau de strings qui est dans les
 	// ressources
-	public static final int DIRECTION_NORD = 0;
-	public static final int DIRECTION_SUD = 1;
-	public static final int DIRECTION_EST = 2;
-	public static final int DIRECTION_OUEST = 3;
-	public static final int DIRECTION_NORD_EST = 4;
-	public static final int DIRECTION_NORD_OUEST = 5;
-	public static final int DIRECTION_SUD_OUEST = 6;
-	public static final int DIRECTION_SUD_EST = 7;
+//	public static final int DIRECTION_NORD = 0;
+//	public static final int DIRECTION_SUD = 1;
+//	public static final int DIRECTION_EST = 2;
+//	public static final int DIRECTION_OUEST = 3;
+//	public static final int DIRECTION_NORD_EST = 4;
+//	public static final int DIRECTION_NORD_OUEST = 5;
+//	public static final int DIRECTION_SUD_OUEST = 6;
+//	public static final int DIRECTION_SUD_EST = 7;
 
 	/**
 	 * Determines whether one Location reading is better than the current Location fix
@@ -111,8 +111,11 @@ public class GPSUtils
 		if (precedente != null)
 		{
 			float tempsEnSecondes = (float) (position.getTime() - precedente.getTime()) / 1000.0f;
-			float distanceEnMetres = position.distanceTo(precedente);
-			return (distanceEnMetres / tempsEnSecondes) * MS_TO_KMH;
+			if (tempsEnSecondes!=0)
+			{
+				float distanceEnMetres = position.distanceTo(precedente);
+				return (distanceEnMetres / tempsEnSecondes) * MS_TO_KMH;
+			}
 		}
 
 		return 0;
@@ -158,27 +161,27 @@ public class GPSUtils
 		return locationManager.getBestProvider(criteria, true);
 	}
 
-	/***
-	 * Retourne l'indice du nom de la direction dans un string array qui se trouve dans les ressources
-	 * @param heading
-	 * @return
-	 */
-	public static int getDirection( float heading)
-	{
-		while( heading<0)
-			heading+=360.0f;
-
-		while( heading>360.0f)
-			heading-=360.0f;
-
-		if (heading < 22)	return DIRECTION_NORD;
-		else if (heading< 67) return DIRECTION_NORD_EST;
-		else if ( heading< 112)	return DIRECTION_EST;
-		else if (heading < 157)	return DIRECTION_SUD_EST;
-		else if (heading < 202) return DIRECTION_SUD;
-		else if (heading < 247) return DIRECTION_SUD_OUEST;
-		else if (heading < 292) return DIRECTION_OUEST;
-		else if (heading < 337) return DIRECTION_NORD_OUEST;
-		else return DIRECTION_NORD;
-	}
+//	/***
+//	 * Retourne l'indice du nom de la direction dans un string array qui se trouve dans les ressources
+//	 * @param heading
+//	 * @return
+//	 */
+//	public static int getDirection( float heading)
+//	{
+//		while( heading<0)
+//			heading+=360.0f;
+//
+//		while( heading>360.0f)
+//			heading-=360.0f;
+//
+//		if (heading < 22)	return DIRECTION_NORD;
+//		else if (heading< 67) return DIRECTION_NORD_EST;
+//		else if ( heading< 112)	return DIRECTION_EST;
+//		else if (heading < 157)	return DIRECTION_SUD_EST;
+//		else if (heading < 202) return DIRECTION_SUD;
+//		else if (heading < 247) return DIRECTION_SUD_OUEST;
+//		else if (heading < 292) return DIRECTION_OUEST;
+//		else if (heading < 337) return DIRECTION_NORD_OUEST;
+//		else return DIRECTION_NORD;
+//	}
 }

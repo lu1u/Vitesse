@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="BoussoleRondeView">
+        <attr name="VitesseRatioTaille" format="float" />
+        <attr name="VitesseTextCouleur" format="color"/>
+        <attr name="VitesseCap" format="float"/>
+    </declare-styleable>
+</resources>

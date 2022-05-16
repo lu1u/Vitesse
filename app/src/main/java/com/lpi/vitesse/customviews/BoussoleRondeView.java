@@ -7,12 +7,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.annotation.NonNull;
@@ -23,35 +20,35 @@ import com.lpi.vitesse.R;
 /**
  * TODO: document your custom view class.
  */
-public class CapView extends View
+public class BoussoleRondeView extends BoussoleView
 {
 	private static final String PROPERTY_VALEUR = "CapView.valeur";
-	Rect _rBoussole = new Rect();            // Pour eviter des allocations dans onDraw
-	Rect _rect = new Rect();
+	final Rect _rBoussole = new Rect();            // Pour eviter des allocations dans onDraw
+	final Rect _rect = new Rect();
 	private boolean _calculerTailleCap = true;
 
 	float _ratioTaille = 1.0f;
 	Drawable _dBoussole;
 
 	ValueAnimator _animator;
-	private float _valeurCible = 0;					// La valeur a atteindre par l'animation
-	private float _valeurADessiner = 0;				// La valeur actuellement affichee par l'animation
-	float _cap = 0;									// Le cap actuel
+	private float _valeurCible = 0;                    // La valeur a atteindre par l'animation
+	private float _valeurADessiner = 0;                // La valeur actuellement affichee par l'animation
+	float _cap = 0;                                    // Le cap actuel
 
 
-	public CapView(Context context)
+	public BoussoleRondeView(Context context)
 	{
 		super(context);
 		init(null, 0);
 	}
 
-	public CapView(Context context, AttributeSet attrs)
+	public BoussoleRondeView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		init(attrs, 0);
 	}
 
-	public CapView(Context context, AttributeSet attrs, int defStyle)
+	public BoussoleRondeView(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 		init(attrs, defStyle);
@@ -60,25 +57,27 @@ public class CapView extends View
 	private void init(AttributeSet attrs, int defStyle)
 	{
 		// Load attributes
-		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.VitesseView, defStyle, 0);
+		final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BoussoleRondeView, defStyle, 0);
 
-		int couleurPrincipal = a.getColor(R.styleable.VitesseView_VitesseTextCouleur, Color.WHITE);
-		_cap = a.getInt(R.styleable.VitesseView_VitesseCap, 0);
-		_ratioTaille = a.getFloat(R.styleable.VitesseView_VitesseRatioTaille, 2.0f);
+		int couleurPrincipal = a.getColor(R.styleable.BoussoleRondeView_VitesseTextCouleur, Color.WHITE);
+		_cap = a.getFloat(R.styleable.BoussoleRondeView_VitesseCap, 0);
+		_ratioTaille = a.getFloat(R.styleable.BoussoleRondeView_VitesseRatioTaille, 2.0f);
 		a.recycle();
 
-		// Ajouter artificiellement quelques applications bidon est mode Design
 		_dBoussole = ResourcesCompat.getDrawable(getContext().getResources(), R.drawable.ic_boussole, getContext().getTheme());
 		if (_dBoussole != null)
 		{
 			_dBoussole.setCallback(null);
 			_dBoussole.setTint(couleurPrincipal);
 		}
+
+		_calculerTailleCap = true;
 	}
 
 
 	/**
 	 * Dessiner le controle
+	 *
 	 * @param canvas
 	 */
 	@Override protected void onDraw(Canvas canvas)
@@ -95,16 +94,15 @@ public class CapView extends View
 			_rBoussole.top += getPaddingTop();
 			_rBoussole.bottom -= getPaddingBottom();
 			_calculerTailleCap = false;
+
+
+			float h = _rBoussole.height() * _ratioTaille;            // _ratioTaille est la part du rayon de la boussole qui contient les graduations
+			_rect.top = _rBoussole.top;
+			_rect.bottom = _rBoussole.top + (int) (h * 2.0f);
+			_rect.left = _rBoussole.centerX() - (int) h;
+			_rect.right = _rBoussole.centerX() + (int) h;
+			_dBoussole.setBounds(_rect);
 		}
-
-		float h = _rBoussole.height() / _ratioTaille;			// _ratioTaille est la part du rayon de la boussole qui contient les graduations
-		_rect.top = _rBoussole.top;
-		_rect.bottom = _rBoussole.top + (int)(h * 2.0f);
-		_rect.left = _rBoussole.centerX() - (int) h;
-		_rect.right = _rBoussole.centerX() + (int) h;
-
-		_dBoussole.setBounds(_rect);
-
 		canvas.save();
 		canvas.rotate(-_valeurADessiner, _rect.exactCenterX(), _rect.exactCenterY());
 		_dBoussole.draw(canvas);
@@ -115,7 +113,7 @@ public class CapView extends View
 	 * Changer la vitesse et le cap
 	 * @param cap
 	 */
-	public void setCap(float cap)
+	@Override public void setCap(float cap)
 	{
 		if (_valeurCible == cap)
 			// Rien a faire
@@ -124,9 +122,9 @@ public class CapView extends View
 		if (_valeurCible != cap)
 		{
 			// Inverser le sens si la difference est superieure à 180 degre (par exemple de 10° à 350°)
-			float difference = Math.abs(_valeurCible- cap);
-			if ( difference > 180)
-				_valeurCible = cap - 360 ;
+			float difference = Math.abs(_valeurCible - cap);
+			if (difference > 180)
+				_valeurCible = cap - 360;
 			else
 				_valeurCible = cap;
 
@@ -161,20 +159,16 @@ public class CapView extends View
 		PropertyValuesHolder propertyRadius = PropertyValuesHolder.ofFloat(PROPERTY_VALEUR, _cap, _valeurCible);
 		_animator.setValues(propertyRadius);
 		_animator.setInterpolator(new AccelerateDecelerateInterpolator());
-		_animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
+		_animator.addUpdateListener(animation ->
 		{
-			@Override
-			public void onAnimationUpdate(@NonNull ValueAnimator animation)
+			try
 			{
-				try
-				{
-					_valeurADessiner = (float) animation.getAnimatedValue(PROPERTY_VALEUR);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-				invalidate();
+				_valeurADessiner = (float) animation.getAnimatedValue(PROPERTY_VALEUR);
+			} catch (Exception e)
+			{
+				e.printStackTrace();
 			}
+			invalidate();
 		});
 
 		_animator.addListener(new Animator.AnimatorListener()
