@@ -7,11 +7,16 @@ import android.location.LocationManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+/***
+ * Classe d'utilitaires GPS
+ */
 public class GPSUtils
 {
 	private static final int TWO_MINUTES = 1000 * 60 * 2;
 	private static final float MS_TO_KMH = 3.6f;
 	private static final float MAX_IMPRECISION = 20;
+
+
 
 	// Les valeurs de DIRECTION_xxx sont les indices dans le tableau de strings qui est dans les
 	// ressources
@@ -98,15 +103,16 @@ public class GPSUtils
 	 * Si la position n'a pas de vitesse, on calcule a partir de la position precedente
 	 * @param position Position actuelle
 	 * @param precedente Position precedente
+	 * @param useSpeed Utiliser la vitesse donnee par le GPS si disponible
 	 * @return
 	 */
-	public static float getSpeed(@Nullable final Location position, @Nullable final Location precedente)
+	public static float getSpeed(@Nullable final Location position, @Nullable final Location precedente, boolean useSpeed)
 	{
 		if (position == null)
 			return 0;
 
-//		if (position.hasSpeed())
-//			return position.getSpeed();
+		if (useSpeed && position.hasSpeed())
+			return position.getSpeed() * MS_TO_KMH;
 
 		if (precedente != null)
 		{
@@ -129,12 +135,12 @@ public class GPSUtils
 	 * @param precedente Position precedente
 	 * @return
 	 */
-	public static float getBearing(@Nullable final Location position, @Nullable final Location precedente)
+	public static float getBearing(@Nullable final Location position, @Nullable final Location precedente, boolean useBearing)
 	{
 		if (position == null)
 			return 0;
 
-		if (position.hasBearing())
+		if (useBearing && position.hasBearing())
 			return position.getBearing();
 
 		if (precedente != null)
@@ -159,6 +165,17 @@ public class GPSUtils
 		criteria.setCostAllowed(false);
 		criteria.setPowerRequirement(Criteria.NO_REQUIREMENT);
 		return locationManager.getBestProvider(criteria, true);
+	}
+
+	public static float getAltitude(Location position)
+	{
+		if (position == null)
+			return 0;
+
+		if (position.hasAltitude())
+			return (float)position.getAltitude();
+
+		return 0;
 	}
 
 //	/***

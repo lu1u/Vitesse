@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -131,7 +132,7 @@ public class AutosizeTextView extends View
 			textPaint.setTextSize(tailleTexte);
 			textPaint.getTextBounds(texte, 0, texte.length(), rText);
 
-			if ((rText.width() > contentWidth) || (rText.height() > contentHeight))
+			if ((rText.width() >= contentWidth) || (rText.height() >= contentHeight))
 				// Trop grand
 				texteMax = tailleTexte;
 			else
@@ -153,5 +154,23 @@ public class AutosizeTextView extends View
 		_calculerTaille = true;
 		invalidate();
 		super.onSizeChanged(w, h, oldw, oldh);
+	}
+
+	public void setFont(String fontPath)
+	{
+		try
+		{
+			Typeface t = Typeface.createFromFile(fontPath);
+			if ( t!=null)
+			{
+				_textPaintPrincipal.setTypeface(t);
+				_calculerTaille = true;
+				invalidate();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

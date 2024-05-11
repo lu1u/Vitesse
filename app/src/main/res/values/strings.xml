@@ -16,5 +16,16 @@
     <string name="min_seconds_between_two_positions">Min. seconds between two positions:</string>
     <string name="gps_provider">Location provider: %s</string>
     <string name="ui_change_seulement_si_necessaire">Change only to solve problems and if you know what you are doing</string>
+    <string name="uiprovider">Provider:</string>
+    <string name="uiinterface">Interface:</string>
+    <string name="uiRatioSpeedHeading">Speed/Heading heigth (0.1 to 0.9)</string>
+    <string name="ui_vitesse_gps">Use GPS speed instead of difference between two locations</string>
+    <string name="ui_cap_gps">Use GPS bearing instead of difference between two locations</string>
+    <string name="_0">0</string>
+    <string name="font_picker_title">Font</string>
+    <string name="button_font">Font</string>
+    <string name="uiLissage">Smoothing</string>
+    <string name="nb_de_valeurs_pour_le_lissage_du_cap"># of seconds to smooth bearing:</string>
+    <string name="formatAltitude">alt:%1$dm</string>
 
 </resources>

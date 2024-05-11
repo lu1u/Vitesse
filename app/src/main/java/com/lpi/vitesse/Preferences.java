@@ -12,11 +12,16 @@ import androidx.annotation.Nullable;
 @SuppressWarnings("CommentedOutCode")
 public class Preferences
 {
-	public static final @NonNull String PREFERENCES_COULEUR_TEXTE = "CouleurTexte";
-	public static final @NonNull String PREFERENCES_COULEUR_FOND = "CouleurFond";
-	public static final String PREFERENCES_DISTANCE_MIN = "DistanceMin";
-	public static final String PREFERENCES_TEMPS_MIN = "TempsMin";
-	public static final String PREFERENCES_PROVIDER = "Provider";
+	public static final @NonNull String COULEUR_TEXTE = "CouleurTexte";
+	public static final @NonNull String COULEUR_FOND = "CouleurFond";
+	public static final String DISTANCE_MIN = "DistanceMin";
+	public static final String TEMPS_MIN = "TempsMin";
+	public static final String PROVIDER = "Provider";
+	public static final String RATIO_VITESSE_CAP = "RatioVitesseCap";
+	public static final String USE_SPEED = "UseSpeed";
+	public static final String USE_BEARING = "UseBearing";
+	public static final String FONTE = "Fonte";
+	public static final String DELAI_LISSAGE_CAP_SECONDES = "DelaiLissageCapSecondes";
 
 	@NonNull private static final String PREFERENCES = Preferences.class.getName();
 
@@ -57,7 +62,20 @@ public class Preferences
 		editor.apply();
 	}
 
-	/*
+
+	public float getFloat(@NonNull final String nom, float defaut)
+	{
+		return settings.getFloat(nom, defaut);
+	}
+
+
+	public void setFloat(@NonNull final String nom, float val)
+	{
+		editor.putFloat(nom, val);
+		editor.apply();
+	}
+	
+
 	public void setBoolean(@NonNull final String nom, boolean val)
 	{
 		editor.putBoolean(nom, val);
@@ -65,26 +83,13 @@ public class Preferences
 	}
 
 
-		public boolean getBoolean(@NonNull final String nom, boolean defaut)
+	public boolean getBoolean(@NonNull final String nom, boolean defaut)
 		{
 			return settings.getBoolean(nom, defaut);
 		}
 
 
-
-
-
-		public float getFloat(@NonNull final String nom, float defaut)
-		{
-			return settings.getFloat(nom, defaut);
-		}
-
-
-		public void setFloat(@NonNull final String nom, float val)
-		{
-			editor.putFloat(nom, val);
-			editor.apply();
-		}
+	/*
 
 
 		public void setChar(@NonNull final String nom, char val)

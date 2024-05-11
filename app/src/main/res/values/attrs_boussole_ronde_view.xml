@@ -3,5 +3,9 @@
         <attr name="VitesseRatioTaille" format="float" />
         <attr name="VitesseTextCouleur" format="color"/>
         <attr name="VitesseCap" format="float"/>
+        <attr name="VitesseCapLisse" format="float"/>
+        <attr name="VitesseCapLisseLargeur" format="dimension"/>
+        <attr name="VitesseCapLisseCouleur" format="color"/>
+        <attr name="VitesseLissageNbValeurs" format="integer"/>
     </declare-styleable>
 </resources>

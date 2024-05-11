@@ -16,4 +16,15 @@
     <string name="min_seconds_between_two_positions">Secondes min. entre deux positions:</string>
     <string name="gps_provider">Fournisseur de position: %s</string>
     <string name="ui_change_seulement_si_necessaire">Changez ces paramètres seulement pour résoudre des problèmes et seulement si vous savez ce que vous faites</string>
+    <string name="uiprovider">Fournisseur:</string>
+    <string name="uiinterface">Interface:</string>
+    <string name="uiRatioSpeedHeading">Rapport hauteur vitesse/cap (0.1...0.9)</string>
+    <string name="ui_vitesse_gps">Utiliser la vitesse donnée par le GPS plutôt que la différence entre deux positions</string>
+    <string name="ui_cap_gps">Utiliser le cap donné par le GPS plutôt que la différence entre deux positions</string>
+    <string name="_0">0</string>
+    <string name="font_picker_title">Fonte</string>
+    <string name="button_font">Fonte</string>
+    <string name="uiLissage">Lissage</string>
+    <string name="nb_de_valeurs_pour_le_lissage_du_cap">Lisser le cap sur # secondes:</string>
+    <string name="formatAltitude">alt:%1$dm</string>
 </resources>

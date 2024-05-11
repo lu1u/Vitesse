@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,6 +46,24 @@ public class AdvancedParametersDialog
 		};
 	}
 
+	private static InputFilter inRange(float min, float max)
+	{
+		return (source, start1, end, dest, dstart, dend) ->
+		{
+			try
+			{
+				float input = Float.parseFloat(dest.toString() + source.toString());
+				if (input < min || input > max)
+					return "";
+				else
+					return null;
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		};
+	}
 	public static void start(@NonNull final Activity activity, @Nullable final Listener listener)
 	{
 		final AlertDialog dialogBuilder = new AlertDialog.Builder(activity).create();
@@ -54,19 +73,37 @@ public class AdvancedParametersDialog
 		final Preferences preferences = Preferences.getInstance(activity);
 
 		// Provider
-		final String provider = preferences.getString(Preferences.PREFERENCES_PROVIDER, PROVIDERS[0]);
+		final String provider = preferences.getString(Preferences.PROVIDER, LocationManager.GPS_PROVIDER);
 		Spinner spProvider = dialogView.findViewById(R.id.spProvider);
 		spProvider.setSelection(getPosition(provider));
 
 		// Distance min
 		EditText etMinDistance = dialogView.findViewById(R.id.etMinDistance);
-		etMinDistance.setText(Integer.toString(preferences.getInt(Preferences.PREFERENCES_DISTANCE_MIN, 0)));
+		etMinDistance.setText(Integer.toString(preferences.getInt(Preferences.DISTANCE_MIN, 0)));
 		etMinDistance.setFilters(new InputFilter[]{inRange(0, 200)});
 
 		// Temps max
 		EditText etMinTemps = dialogView.findViewById(R.id.etMinTime);
-		etMinTemps.setText(Integer.toString(preferences.getInt(Preferences.PREFERENCES_TEMPS_MIN, 0)));
-		etMinTemps.setFilters(new InputFilter[]{inRange(0, 200)});
+		etMinTemps.setText(Integer.toString(preferences.getInt(Preferences.TEMPS_MIN, 0)));
+		etMinTemps.setFilters(new InputFilter[]{inRange(0, 10)});
+
+		// Ratio Hauteur vitesse/cap
+		EditText etVitesseCap = dialogView.findViewById(R.id.etRatioSpeedHeading);
+		etVitesseCap.setText(Float.toString(preferences.getFloat(Preferences.RATIO_VITESSE_CAP, 0.75f)));
+		etVitesseCap.setFilters(new InputFilter[]{inRange(0.0f, 0.9f)});
+
+		// Vitesse GPS
+		Switch swVitesse = dialogView.findViewById(R.id.swVitesseGPS);
+		swVitesse.setChecked(preferences.getBoolean(Preferences.USE_SPEED, false));
+
+		// Cap GPS
+		Switch swCap = dialogView.findViewById(R.id.swCapGPS);
+		swCap.setChecked(preferences.getBoolean(Preferences.USE_BEARING, false));
+
+		// Lissage cap
+		EditText etLissageCap = dialogView.findViewById(R.id.etNbValeursLissage);
+		etLissageCap.setText(Integer.toString(preferences.getInt(Preferences.DELAI_LISSAGE_CAP_SECONDES, 10)));
+		etLissageCap.setFilters(new InputFilter[]{inRange(10, 1000)});
 
 		// Boutons OK et Annuler
 		Button bOk = dialogView.findViewById(R.id.btOk);
@@ -74,12 +111,18 @@ public class AdvancedParametersDialog
 		{
 			final int minDistance = contraint(0, 200, etMinDistance.getText().toString());
 			final int minTemps = contraint(0, 200, etMinTemps.getText().toString());
+			final int nbValeurs = contraint(10, 1000, etLissageCap.getText().toString());
+
 			final int prov = spProvider.getSelectedItemPosition();
+			final float ratio = contraint(0.1f, 0.9f, etVitesseCap.getText().toString());
+			preferences.setInt(Preferences.DISTANCE_MIN, minDistance);
+			preferences.setInt(Preferences.TEMPS_MIN, minTemps);
+			preferences.setInt(Preferences.DELAI_LISSAGE_CAP_SECONDES, nbValeurs);
 
-			preferences.setInt(Preferences.PREFERENCES_DISTANCE_MIN, minDistance);
-			preferences.setInt(Preferences.PREFERENCES_TEMPS_MIN, minTemps);
-			preferences.setString(Preferences.PREFERENCES_PROVIDER, PROVIDERS[prov]);
-
+			preferences.setString(Preferences.PROVIDER, PROVIDERS[prov]);
+			preferences.setFloat(Preferences.RATIO_VITESSE_CAP, ratio);
+			preferences.setBoolean(Preferences.USE_SPEED, swVitesse.isChecked());
+			preferences.setBoolean(Preferences.USE_BEARING, swCap.isChecked());
 			if (listener != null)
 				listener.onOK();
 			dialogBuilder.dismiss();
@@ -123,6 +166,31 @@ public class AdvancedParametersDialog
 		try
 		{
 			int val = Integer.parseInt(text);
+			if (val < min)
+				return min;
+
+			if (val > max)
+				return max;
+
+			return val;
+		} catch (Exception e)
+		{
+			return min;
+		}
+	}
+
+	/***
+	 * Retourne la valeur representee par la chaine de caracteres, contrainte entre min et max
+	 * @param min
+	 * @param max
+	 * @param text
+	 * @return
+	 */
+	private static float contraint(float min, float max, String text)
+	{
+		try
+		{
+			float val = Float.parseFloat(text);
 			if (val < min)
 				return min;
 

@@ -6,7 +6,7 @@
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/contracte.xml" value="0.1" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/dilate.xml" value="0.228" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/fond_fragment.xml" value="0.1" />
-        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_boussole.xml" value="0.67" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_boussole.xml" value="0.354" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_dessin.xml" value="0.1115" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_icone.xml" value="0.1115" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/ic_speedometer.xml" value="0.1" />
@@ -23,14 +23,19 @@
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/drawable/square_icon_background.xml" value="0.1185" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout-small/layout.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_apropos.xml" value="0.25" />
-        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_main.xml" value="0.5751633986928104" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/activity_main.xml" value="0.7866666666666666" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/advanced_parameters.xml" value="0.9" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/font_picker.xml" value="0.23984608807182556" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/fragment_color.xml" value="0.75" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/fragment_vitesse.xml" value="0.5849609375" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/main_normal.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/main_pip.xml" value="0.30833333333333335" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_autosize_text_view.xml" value="0.1" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_boussole3_d_view.xml" value="0.5888671875" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_boussole_lineaire_view.xml" value="0.9066666666666666" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_boussole_view.xml" value="0.33" />
         <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/layout/sample_vitesse_view.xml" value="0.33" />
+        <entry key="..\:/Donnees/lucien/Developpement/Android/Vitesse/app/src/main/res/xml/preferences.xml" value="0.5" />
       </map>
     </option>
   </component>
@@ -39,7 +44,7 @@
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
     <option name="myNullables">
       <value>
-        <list size="12">
+        <list size="14">
           <item index="0" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
           <item index="1" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
@@ -52,12 +57,14 @@
           <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
           <item index="10" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
           <item index="11" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
+          <item index="12" class="java.lang.String" itemvalue="org.jspecify.nullness.Nullable" />
+          <item index="13" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="11">
+        <list size="13">
           <item index="0" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
           <item index="1" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
           <item index="2" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
@@ -69,11 +76,13 @@
           <item index="8" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="9" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="10" class="java.lang.String" itemvalue="org.eclipse.jdt.annotation.NonNull" />
+          <item index="11" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
+          <item index="12" class="java.lang.String" itemvalue="org.jspecify.nullness.NonNull" />
         </list>
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
