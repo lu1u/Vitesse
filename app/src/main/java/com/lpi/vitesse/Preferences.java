@@ -17,7 +17,6 @@ public class Preferences
 	public static final String DISTANCE_MIN = "DistanceMin";
 	public static final String TEMPS_MIN = "TempsMin";
 	public static final String PROVIDER = "Provider";
-	public static final String RATIO_VITESSE_CAP = "RatioVitesseCap";
 	public static final String USE_SPEED = "UseSpeed";
 	public static final String USE_BEARING = "UseBearing";
 	public static final String FONTE = "Fonte";

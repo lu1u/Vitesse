@@ -7,5 +7,4 @@
     <dimen name="largeur_fond_fragment">4dp</dimen>
     <dimen name="taille_bouton_fragment_color">32dp</dimen>
     <dimen name="stroke_progress">1dp</dimen>
-    <dimen name="marge_exemple_fullscreen">32dp</dimen>
 </resources>

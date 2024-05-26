@@ -78,8 +78,18 @@ public class AutosizeTextView extends View
 				_calculerTaille = false;
 			}
 
-			_textPaintPrincipal.getTextBounds(_texte, 0, _texte.length(), _rText);
-			canvas.drawText(_texte, _rPrincipal.exactCenterX() - _rText.exactCenterX(), _rPrincipal.exactCenterY() - _rText.exactCenterY(), _textPaintPrincipal);
+			drawMultilineText(canvas, _texte, _rPrincipal.exactCenterX() - _rText.exactCenterX(), _rPrincipal.exactCenterY() - _rText.exactCenterY(), _textPaintPrincipal);
+		}
+	}
+
+	private void drawMultilineText(@NonNull final Canvas canvas, @NonNull final  String texte, float x, float y, @NonNull final TextPaint textPaint)
+	{
+		Rect rText = new Rect();
+		getTextBounds(textPaint, texte, rText);
+		x -= rText.width() /2 ;
+		for (String line: texte.split("\n")) {
+			canvas.drawText(line, x, y, textPaint);
+			y += textPaint.descent() - textPaint.ascent();
 		}
 	}
 
@@ -117,8 +127,8 @@ public class AutosizeTextView extends View
 	 */
 	private void calculeTextPaint(@NonNull String texte, @NonNull Rect r, @NonNull TextPaint textPaint)
 	{
-		int contentWidth = r.width();
-		int contentHeight = r.height();
+		final int contentWidth = r.width();
+		final int contentHeight = r.height();
 
 		float texteMax = Math.min(r.width(), r.height());
 		float texteMin = 1;
@@ -130,7 +140,7 @@ public class AutosizeTextView extends View
 		while (texteMax > (texteMin + 1))
 		{
 			textPaint.setTextSize(tailleTexte);
-			textPaint.getTextBounds(texte, 0, texte.length(), rText);
+			getTextBounds(textPaint, texte,  rText);
 
 			if ((rText.width() >= contentWidth) || (rText.height() >= contentHeight))
 				// Trop grand
@@ -141,6 +151,33 @@ public class AutosizeTextView extends View
 
 			tailleTexte = texteMin + (texteMax - texteMin) / 2.0f;
 		}
+	}
+
+	/***
+	 * Calcule de la taille en pixels d'un texte multiligne
+	 * @param textPaint
+	 * @param texte
+	 * @param rText
+	 */
+	private void getTextBounds(TextPaint textPaint, String texte, Rect rText)
+	{
+		int largeur = Integer.MIN_VALUE;
+		int hauteur = 0;
+
+		Rect rLine = new Rect();
+
+		for (String line: texte.split("\n"))
+		{
+			textPaint.getTextBounds(line, 0, line.length(), rLine);
+			if ( rLine.width()>largeur)
+				largeur = rLine.width();
+			hauteur += textPaint.descent() - textPaint.ascent();
+		}
+
+		rText.top = 0;
+		rText.bottom = hauteur;
+		rText.left = 0;
+		rText.right = largeur;
 	}
 
 	@Override protected void onSizeChanged(int w, int h, int oldw, int oldh)

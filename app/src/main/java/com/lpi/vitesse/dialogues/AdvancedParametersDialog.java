@@ -87,11 +87,6 @@ public class AdvancedParametersDialog
 		etMinTemps.setText(Integer.toString(preferences.getInt(Preferences.TEMPS_MIN, 0)));
 		etMinTemps.setFilters(new InputFilter[]{inRange(0, 10)});
 
-		// Ratio Hauteur vitesse/cap
-		EditText etVitesseCap = dialogView.findViewById(R.id.etRatioSpeedHeading);
-		etVitesseCap.setText(Float.toString(preferences.getFloat(Preferences.RATIO_VITESSE_CAP, 0.75f)));
-		etVitesseCap.setFilters(new InputFilter[]{inRange(0.0f, 0.9f)});
-
 		// Vitesse GPS
 		Switch swVitesse = dialogView.findViewById(R.id.swVitesseGPS);
 		swVitesse.setChecked(preferences.getBoolean(Preferences.USE_SPEED, false));
@@ -114,13 +109,11 @@ public class AdvancedParametersDialog
 			final int nbValeurs = contraint(10, 1000, etLissageCap.getText().toString());
 
 			final int prov = spProvider.getSelectedItemPosition();
-			final float ratio = contraint(0.1f, 0.9f, etVitesseCap.getText().toString());
 			preferences.setInt(Preferences.DISTANCE_MIN, minDistance);
 			preferences.setInt(Preferences.TEMPS_MIN, minTemps);
 			preferences.setInt(Preferences.DELAI_LISSAGE_CAP_SECONDES, nbValeurs);
 
 			preferences.setString(Preferences.PROVIDER, PROVIDERS[prov]);
-			preferences.setFloat(Preferences.RATIO_VITESSE_CAP, ratio);
 			preferences.setBoolean(Preferences.USE_SPEED, swVitesse.isChecked());
 			preferences.setBoolean(Preferences.USE_BEARING, swCap.isChecked());
 			if (listener != null)

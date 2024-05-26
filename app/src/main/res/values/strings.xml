@@ -26,6 +26,6 @@
     <string name="button_font">Font</string>
     <string name="uiLissage">Smoothing</string>
     <string name="nb_de_valeurs_pour_le_lissage_du_cap"># of seconds to smooth bearing:</string>
-    <string name="formatAltitude">alt:%1$dm</string>
+    <string name="formatAltitude">Alt:\n%1$dm</string>
 
 </resources>

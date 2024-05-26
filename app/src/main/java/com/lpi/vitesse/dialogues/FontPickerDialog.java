@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,8 +19,6 @@ import com.lpi.vitesse.FontManager;
 import com.lpi.vitesse.Preferences;
 import com.lpi.vitesse.R;
 
-import java.lang.reflect.Array;
-import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,15 +53,16 @@ public class FontPickerDialog
 		int idx = 0;
 		int selectedItem = 0;
 
-		for (String path : fonts.keySet())
-		{
-			if (path.equals(selectedFontPath))
-				selectedItem = idx;
+		if (fonts != null)
+			for (String path : fonts.keySet())
+			{
+				if (path.equals(selectedFontPath))
+					selectedItem = idx;
 
-			fontPaths.add(path);
-			fontNames.add(fonts.get(path));
-			idx++;
-		}
+				fontPaths.add(path);
+				fontNames.add(fonts.get(path));
+				idx++;
+			}
 
 		FontAdapter adapter = new FontAdapter(activity, fontNames, fontPaths);
 		lv.setAdapter(adapter);
@@ -89,11 +86,11 @@ public class FontPickerDialog
 	// We use BaseAdapter since we need both arrays, and the effort is quite small.
 	public static class FontAdapter extends BaseAdapter
 	{
-		private Context _context;
-		private List<String> m_fontPaths;
-		private List<String> m_fontNames;
+		private final Context _context;
+		private final List<String> m_fontPaths;
+		private final List<String> m_fontNames;
 
-		public FontAdapter(Context context, ArrayList fontNames, ArrayList fontPathes)
+		public FontAdapter(@NonNull final Context context, @NonNull final ArrayList fontNames, @NonNull final ArrayList fontPathes)
 		{
 			_context = context;
 			m_fontNames = fontNames;
@@ -140,7 +137,7 @@ public class FontPickerDialog
 			if (view != null)
 			{
 				// Find the text view from our interface
-				TextView tv = (TextView) view.findViewById(android.R.id.text1);
+				TextView tv = view.findViewById(android.R.id.text1);
 				Typeface tface = Typeface.createFromFile(m_fontPaths.get(position));
 				if (tface != null)
 					tv.setTypeface(tface);

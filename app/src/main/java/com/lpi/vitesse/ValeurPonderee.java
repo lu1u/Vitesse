@@ -8,8 +8,8 @@ public class ValeurPonderee
 
 	private static class ValeurRecue
 	{
-		public float _valeur;
-		public Calendar _date;
+		public final float _valeur;
+		public final Calendar _date;
 
 		public ValeurRecue(float valeur)
 		{

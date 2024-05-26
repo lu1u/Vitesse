@@ -25,20 +25,6 @@ import com.lpi.vitesse.ValeurPonderee;
  */
 public class BoussoleRondeView extends View
 {
-//	double angle = 0;
-
-//	private class CapReçu
-//	{
-//		public float _cap;
-//		public Calendar _date;
-//
-//		public CapReçu(float cap)
-//		{
-//			_cap = cap;
-//			_date = Calendar.getInstance();
-//		}
-//	}
-
 	private static final String PROPERTY_VALEUR = "CapView.valeur";
 	private float _valeurADessiner = 0;                    // La valeur actuellement affichee par l'animation
 
@@ -46,7 +32,6 @@ public class BoussoleRondeView extends View
 	float _ratioTaille = 1.0f;
 	Drawable _dBoussole;
 	float _cap = 0;                                    // Le cap actuel
-//	int _delaiLissageSecondes = 10;                            // Dernieres valeurs de lissage du cap
 
 	// Variables de travail
 	final Rect _rBoussole = new Rect();                    // Pour eviter des allocations dans onDraw
@@ -87,10 +72,7 @@ public class BoussoleRondeView extends View
 			couleurPrincipal = a.getColor(R.styleable.BoussoleRondeView_VitesseTextCouleur, Color.WHITE);
 			_cap = a.getFloat(R.styleable.BoussoleRondeView_VitesseCap, 0);
 			_ratioTaille = a.getFloat(R.styleable.BoussoleRondeView_VitesseRatioTaille, 2.0f);
-//		_delaiLissageSecondes = a.getInt(R.styleable.BoussoleRondeView_VitesseLissageNbValeurs, 5);
-			//_capLissé = a.getFloat(R.styleable.BoussoleRondeView_VitesseCapLisse, 0);
-//		if (_delaiLissageSecondes < 1)
-//			_delaiLissageSecondes = 1;
+
 			_paintCapLissé.setStrokeWidth(a.getDimension(R.styleable.BoussoleRondeView_VitesseCapLisseLargeur, 8));
 			_paintCapLissé.setColor(a.getColor(R.styleable.BoussoleRondeView_VitesseCapLisseCouleur, Color.RED));
 			a.recycle();
@@ -158,46 +140,6 @@ public class BoussoleRondeView extends View
 		canvas.restore();
 	}
 
-//	private void drawCentre(Canvas canvas, String text, TextPaint paint, float x, float y)
-//	{
-//		paint.setTextAlign(Paint.Align.CENTER);
-//		Rect bounds = new Rect();
-//		paint.getTextBounds(text, 0, text.length(), bounds);
-//		canvas.drawText(text, x, y + (bounds.height() / 2.0f), paint);
-//	}
-//
-//	private String toTexte(int i)
-//	{
-//		while (i < 0)
-//			i += 360;
-//		while (i > 360)
-//			i -= 360;
-//
-//		if (i < 30)
-//			return "N";
-//		if (i < 70)
-//			return "NE";
-//		if (i < 110)
-//			return "E";
-//		if (i < 160)
-//			return "SE";
-//		if (i < 200)
-//			return "S";
-//		if (i < 260)
-//			return "SO";
-//		if (i < 290)
-//			return "O";
-//		if (i < 350)
-//			return "NO";
-//		return "N";
-//
-//	}
-//
-//	private static double degToRadian(double degre)
-//	{
-//		return (degre * Math.PI) / 180.0;
-//	}
-
 	/***
 	 * Changer la vitesse
 	 * @param cap
@@ -213,21 +155,6 @@ public class BoussoleRondeView extends View
 
 		// Nouveau cap lissé
 		_capPondere.ajouteValeur(cap);
-
-//		_dernieresValeurs.add(new CapReçu(cap));
-//
-//		// Eliminer les valeurs trop anciennes
-//		Calendar debut = Calendar.getInstance();
-//		debut.roll(Calendar.SECOND, -_delaiLissageSecondes);
-//		while ((_dernieresValeurs.size() > 0) && (_dernieresValeurs.getFirst()._date.before(debut)))
-//			_dernieresValeurs.removeFirst();
-//
-//		// Valeur moyenne du cap
-//		_capLissé = 0;
-//		for (CapReçu f : _dernieresValeurs)
-//			_capLissé += f._cap;
-//		_capLissé /= _dernieresValeurs.size();
-
 		_calculerTailleCap = true;
 		animer();
 	}
@@ -286,7 +213,6 @@ public class BoussoleRondeView extends View
 		{
 			@Override public void onAnimationStart(final Animator animator)
 			{
-
 			}
 
 			@Override public void onAnimationEnd(final Animator animator)
@@ -299,12 +225,10 @@ public class BoussoleRondeView extends View
 
 			@Override public void onAnimationCancel(final Animator animator)
 			{
-
 			}
 
 			@Override public void onAnimationRepeat(final Animator animator)
 			{
-
 			}
 		});
 		_animator.start();

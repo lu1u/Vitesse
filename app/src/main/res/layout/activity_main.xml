@@ -21,6 +21,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFull1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFull2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFull3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFull4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.75"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
@@ -120,7 +156,29 @@
             app:layout_constraintStart_toStartOf="@+id/atvVitesse"
             app:layout_constraintTop_toTopOf="@+id/vFond" />
 
-        <com.lpi.vitesse.customviews.AutosizeTextView
+        <TextView
+            android:id="@+id/atvVitesse"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="900dp"
+            android:autoSizeMinTextSize="4dp"
+            android:autoSizeTextType="uniform"
+            android:background="#0000"
+            android:breakStrategy="high_quality"
+            android:gravity="center"
+            android:shadowColor="#4000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="16"
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textColor="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/vFond"
+            app:layout_constraintStart_toStartOf="@+id/vFond"
+            app:layout_constraintTop_toTopOf="@+id/guidelineFull2" />
+
+        <!--<com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvVitesse"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -134,22 +192,44 @@
             app:layout_constraintEnd_toEndOf="@+id/vFond"
             app:layout_constraintStart_toStartOf="@+id/vFond"
             app:layout_constraintTop_toBottomOf="@+id/boussoleView" />
+                       -->
 
+        <!--
         <com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvAltitude"
             android:layout_width="128dp"
             android:layout_height="64dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             app:AutosizeTextTexte="alt 1000m"
             app:layout_constraintBottom_toBottomOf="@+id/atvVitesse"
+            app:layout_constraintEnd_toEndOf="@+id/atvVitesse" />
+                    -->
+        <TextView
+            android:id="@+id/atvAltitude"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:autoSizeMaxTextSize="900dp"
+            android:autoSizeMinTextSize="4dp"
+            android:autoSizeTextType="uniform"
+            android:background="#0000"
+            android:breakStrategy="high_quality"
+            android:gravity="center"
+            android:text="alt:
+1000m"
+            android:textColor="@color/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/vFond"
             app:layout_constraintEnd_toEndOf="@+id/atvVitesse"
-            app:layout_constraintTop_toBottomOf="@+id/atvVitesse" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guidelineFull1"
+            app:layout_constraintTop_toTopOf="@+id/guidelineFull4"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/bFonte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/button_font"
             android:textAllCaps="false"
@@ -204,11 +284,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.05"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.6"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <View
             android:id="@+id/vFondPip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#4000"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -220,19 +337,41 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="-64dp"
             android:alpha="0.8"
             android:background="#0000"
+            android:visibility="visible"
             app:VitesseRatioTaille="5"
-            app:VitesseTextCouleur="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@+id/atvVitessePip"
+            app:VitesseTextCouleur="@color/colorOnPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinePip3"
             app:layout_constraintEnd_toEndOf="@+id/atvVitessePip"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <com.lpi.vitesse.customviews.AutosizeTextView
+
+        <TextView
+            android:id="@+id/atvVitessePip"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeMaxTextSize="1000dp"
+            android:autoSizeMinTextSize="2dp"
+            android:autoSizeTextType="uniform"
+            android:background="#0000"
+            android:breakStrategy="high_quality"
+            android:gravity="center"
+            android:shadowColor="#8000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="16"
+            android:text="0"
+            android:textColor="@color/colorOnPrimary"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelinePip2" />
+        <!--<com.lpi.vitesse.customviews.AutosizeTextView
             android:id="@+id/atvVitessePip"
             android:layout_width="0dp"
             android:layout_height="600dp"
@@ -243,16 +382,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <com.lpi.vitesse.customviews.AutosizeTextView
+                   -->
+        <TextView
             android:id="@+id/atvAltitudePip"
-            android:layout_width="128dp"
-            android:layout_height="64dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:AutosizeTextTexte="alt 1000m"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:autoSizeMaxTextSize="1000dp"
+            android:autoSizeMinTextSize="2dp"
+            android:autoSizeTextType="uniform"
+            android:background="#0000"
+            android:breakStrategy="high_quality"
+            android:gravity="center_vertical|end"
+            android:shadowColor="#6000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="6"
+            android:text="Alt:"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/atvVitessePip"
+            app:layout_constraintStart_toStartOf="@+id/guidelinePip1"
+            app:layout_constraintTop_toTopOf="@+id/guidelinePip4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
